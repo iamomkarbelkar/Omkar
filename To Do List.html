@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .task-list {
+    list-style: none;
+    padding: 0;
+  }
+  .task-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+  }
+  .task-item label {
+    flex-grow: 1;
+    margin-left: 1rem;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>To-Do List</h1>
+  </div>
+  <div class="container">
+    <form id="taskForm">
+      <input type="text" id="newTask" placeholder="Add a new task">
+      <button type="button" onclick="addTask()">Add</button>
+    </form>
+    <ul class="task-list" id="taskList">
+      <!-- Task items will be added dynamically here -->
+    </ul>
+  </div>
+
+  <script>
+    function addTask() {
+      var newTaskText = document.getElementById("newTask").value;
+      if (newTaskText !== "") {
+        var taskList = document.getElementById("taskList");
+        var taskItem = document.createElement("li");
+        taskItem.className = "task-item";
+        taskItem.innerHTML = `
+          <input type="checkbox" onchange="toggleTask(this)">
+          <label>${newTaskText}</label>`;
+        taskList.appendChild(taskItem);
+        document.getElementById("newTask").value = "";
+      }
+    }
+
+    function toggleTask(checkbox) {
+      var taskItem = checkbox.parentElement;
+      if (checkbox.checked) {
+        taskItem.style.textDecoration = "line-through";
+      } else {
+        taskItem.style.textDecoration = "none";
+      }
+    }
+  </script>
+</body>
+</html>
